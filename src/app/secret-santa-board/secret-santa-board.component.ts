@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 export type secretSantaItemObj = {
   name: string;
   par: string;
+  visible: boolean;
 };
 
 @Component({
@@ -26,9 +27,8 @@ export class SecretSantaBoardComponent implements OnInit {
     'Elisabeht',
   ];
   //propidedad + el type //
+  visible: boolean = true;
   secretSantaList: secretSantaItemObj[] = [];
-
-  visible: boolean = false;
 
   constructor() {}
 
@@ -54,11 +54,13 @@ export class SecretSantaBoardComponent implements OnInit {
       let pares: secretSantaItemObj = {
         name: item,
         par: persona[pareja],
+        visible: true,
       };
       if (lista != '') {
         this.secretSantaList.push({
           name: item,
           par: persona[pareja] || 'Buscando amigos por ti!!',
+          visible: true,
         });
       }
     });
