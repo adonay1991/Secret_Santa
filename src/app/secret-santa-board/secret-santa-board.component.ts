@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 export type secretSantaItemObj = {
   name: string;
   par: string;
-  visible: boolean;
 };
 
 @Component({
@@ -22,7 +21,6 @@ export class SecretSantaBoardComponent implements OnInit {
     'Angelines',
     'Paloma',
     'Luis-Marin',
-    'Angelines',
     'Monica',
     'Elisabeht',
   ];
@@ -40,27 +38,28 @@ export class SecretSantaBoardComponent implements OnInit {
   buildSecretSanta() {
     // desordenando la lista con shuffle
     let persona = this.shuffle(this.friendList);
+    // let persona = this.friendList.sort(() => {
+    //   return Math.random() - 0.5;
+    // });
     //creo una lista vacia para el push de santaList
     let lista: string = '';
     if (persona.lenght % 2 != 0) {
-      lista = persona.pop();
+      lista = persona.push();
     }
 
     let totalPersona = persona.lenght;
 
     // haciendo push a la lista de santaList
     persona.forEach((item, i) => {
-      let pareja = i === totalPersona - 1 ? 0 : i + 1;
+      let pareja = i === totalPersona ? 0 : i + 1;
       let pares: secretSantaItemObj = {
         name: item,
         par: persona[pareja],
-        visible: true,
       };
       if (lista != '') {
         this.secretSantaList.push({
           name: item,
-          par: persona[pareja] || 'Buscando amigos por ti!!',
-          visible: true,
+          par: persona[pareja] || this.secretSantaList[0].name,
         });
       }
     });
